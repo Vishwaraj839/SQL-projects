@@ -1,0 +1,30 @@
+create database Sales_data;
+use Sales_data;
+
+select * from sales_data_sample;
+
+select PRODUCTCODE,
+   sum(sales) AS TotalRevenue
+FROM sales_data_sample
+group by PRODUCTCODE
+order by TotalRevenue desc;
+    
+    
+select 
+     YEAR_ID,
+     MONTH_ID,
+     sum(sales) AS MonthlyRevenue
+from sales_data_sample
+group by  YEAR_ID, MONTH_ID
+order by YEAR_ID, MONTH_ID;
+
+
+select 
+     CUSTOMERNAME, 
+     sum(Sales) as TotalSpending
+INTO OUTFILE "C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\Customer_TotalSpending.csv"
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+from sales_data_sample
+group by CUSTOMERNAME
+order by TotalSpending desc;
